@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header"
+import Button from "./components/Button"
+import { formatearDinero } from "./helpers"
 
 function App() {
   // Definiendo las variales con un Array destructurando el Array
@@ -45,23 +47,15 @@ function App() {
       <Header />
 
       <div className="flex justify-between my-6">
-        <button
-          type="button"
-          className="h-10 w-10 flex items-center justify-center 
-          font-bold text-white text-2xl bg-lime-500 rounded-full
-          hove:outline-none hover:ring-2 hover:ring-offset-2
-          hover-ring-lime-500"
-          onClick={handleCantidadDecremento}
-        >-</button>
+        <Button
+          operador="-"
+          fn={handleCantidadDecremento}
+        />
 
-        <button
-          type="button"
-          className="h-10 w-10 flex items-center justify-center 
-          font-bold text-white text-2xl bg-lime-500 rounded-full
-          hove:outline-none hover:ring-2 hover:ring-offset-2
-          hover-ring-lime-500"
-          onClick={handleCantidadIncremento}
-        >+</button>
+        <Button
+          operador="+"
+          fn={handleCantidadIncremento}
+        />
       </div>
 
 
@@ -79,8 +73,19 @@ function App() {
 
       <p className="text-center my-10 text-5xl font-extrabold
         text-indigo-600">
-        {cantidad}
+        {formatearDinero(cantidad)}
       </p>
+
+      <h2 className="text-center text-2xl font-bold text-gray-500">
+        Elige un <span className="text-indigo-600">Plazo </span>
+        a pagar
+      </h2>
+
+      <select>
+        <option value="6">6 meses</option>
+        <option value="12">12 meses</option>
+        <option value="24">24 meses</option>
+      </select>
     </div>
   )
 }
