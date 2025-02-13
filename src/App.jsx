@@ -7,11 +7,18 @@ function App() {
   // Definiendo las variales con un Array destructurando el Array
   const [cantidad, setCantidad] = useState(10000);
   const [meses, setMeses] = useState(6);
-  const [total, setTotal] = useState(calcularTotalPagar(cantidad, meses));
+  const [total, setTotal] = useState(0);
+  const [pagar, setPagar] = useState(0);
 
   useEffect(() => {
-    console.log('El componente esta Listo...')
-  }, []);
+    const resultadoTotalPagar = calcularTotalPagar(cantidad, meses);
+    setTotal(resultadoTotalPagar)
+  }, [cantidad, meses]);
+
+  useEffect(() => {
+    setPagar(total / meses)
+  }, [total]);
+
 
   const MIN = 0;
   const MAX = 20000;
@@ -110,7 +117,7 @@ function App() {
           {formatearDinero(total)} a pagar
         </p>
         <p className="text-xl text-gray-500 text-center font-bold">
-          Mensualidades
+          {formatearDinero(pagar)} Mensualidades
         </p>
       </div>
     </div>
